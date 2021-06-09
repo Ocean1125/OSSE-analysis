@@ -9,6 +9,9 @@ test*
 *.nc
 *.mat
 
+# other outputs
+*.png
+
 # Stupid Mac files
 .DS_Store
 
