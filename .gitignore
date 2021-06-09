@@ -1,3 +1,7 @@
+# testing and devel files
+test*
+*testing*
+
 # temporary files, log files
 *.log
 
@@ -7,3 +11,10 @@
 
 # Stupid Mac files
 .DS_Store
+
+# Stupid vscode files
+.vscode
+
+# Stupid python files
+__pycache__
+.ipynb_checkpoints
