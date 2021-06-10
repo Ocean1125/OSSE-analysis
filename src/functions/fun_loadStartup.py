@@ -21,5 +21,6 @@ import os
 import glob
 import repackage
 repackage.add('../../')
+repackage.add('../')
 
 print('loaded my modules')
