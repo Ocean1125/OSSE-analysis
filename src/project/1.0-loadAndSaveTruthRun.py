@@ -6,13 +6,13 @@ from IPython import get_ipython
 # %%
 
 # run my startup script
-exec(open("../src/functions/fun_loadStartup.py").read())
+exec(open("../../src/functions/fun_loadStartup.py").read())
 # load my functions
-exec(open("../src/functions/fun_loadMyFunctions.py").read())
+exec(open("../../src/functions/fun_loadMyFunctions.py").read())
 
 # %%
 ### Load grid
-grdFile = '../data/raw/EACouter_varres_grd_mergedBLbry_uhroms.nc'
+grdFile = '../../data/raw/EACouter_varres_grd_mergedBLbry_uhroms.nc'
 grid = loadRomsGrid(grdFile)
 
 
@@ -20,10 +20,10 @@ grid = loadRomsGrid(grdFile)
 ### Set file names
 runningLocation = 'gdata'
 if  runningLocation== 'local':
-    hisFilePath='../data/raw/'
+    hisFilePath='../../data/raw/'
 elif runningLocation == 'gdata':
     hisFilePath='/g/data/fu5/deg581/EAC_2yr_truthRun_obsVerification/output/'
-outFilePath='../data/proc/'
+outFilePath='../../data/proc/'
 
 
 # %%

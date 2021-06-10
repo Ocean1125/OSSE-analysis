@@ -20,6 +20,6 @@ import cartopy.feature as cfeature
 import os
 import glob
 import repackage
-repackage.add('../')
+repackage.add('../../')
 
 print('loaded my modules')
