@@ -22,3 +22,7 @@ test*
 # Stupid python files
 __pycache__
 .ipynb_checkpoints
+
+# other files
+/src/ext/matlab
+/data/raw/OSSE_SSHSST
