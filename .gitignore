@@ -4,6 +4,9 @@ test*
 
 # temporary files, log files
 *.log
+*.e[0-9]*
+*.o[0-9]*
+*.out
 
 # big outputs
 *.nc

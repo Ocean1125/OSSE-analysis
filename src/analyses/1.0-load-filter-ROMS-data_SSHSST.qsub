@@ -1,0 +1,29 @@
+#!/bin/bash
+ 
+#PBS -P fu5
+#PBS -q hugemem
+#PBS -l ncpus=48
+#PBS -l mem=1470GB
+#PBS -l jobfs=1400GB
+#PBS -l walltime=48:00:00
+#PBS -l wd
+#PBS -l storage=scratch/fu5+gdata/fu5
+
+# Load modules, always specify version number.
+module load python3/3.7.4
+module load openmpi/4.0.2
+ 
+# Set number of OMP threads
+export OMP_NUM_THREADS=$PBS_NCPUS
+
+# load python env
+#source /g/data/fu5/deg581/python_envs/devel3.7/bin/activate
+source /g/data/fu5/deg581/miniconda3/etc/profile.d/conda.sh
+conda activate /g/data/fu5/deg581/miniconda3/envs/devel3.9
+
+cd /g/data/fu5/deg581/OSSE_analysis/src/analyses
+ 
+# Run Python applications
+#mpirun -np $PBS_NCPUS ipython 1.0-load-filter-ROMS-data.py > $PBS_JOBID.log
+#ipython 1.0-load-filter-ROMS-data.py > $PBS_JOBID.log
+mpirun -np 1 python -m IPython 1.0-load-filter-ROMS-data_SSHSST.py > logs/$PBS_JOBID.log

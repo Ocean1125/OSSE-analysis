@@ -1,0 +1,45 @@
+#!/bin/bash
+#PBS -P fu5
+#PBS -q normal
+#PBS -l mem=128gb,walltime=24:00:00,ncpus=1
+#PBS -l wd
+#PBS -N cdo_5daymns
+#PBS -l storage=gdata/fu5+scratch/fu5
+
+cd /g/data/fu5/deg581/OSSE_analysis/src/analyses/
+
+module load cdo
+
+#model_dir=$'/g/data/fu5/deg581/OSSE_SSHSST_XBT_NORTH/output/'
+out_dir=$'/g/data/fu5/deg581/OSSE_analysis/data/proc/'
+
+#exp_name=$'OSSE_SSHSST_XBT_NORTH'
+hisname=$'roms_fwd_outer1_'
+year_start=$'08033'
+year_end=$'08401'
+
+expNames=( OSSE_SSHSST OSSE_SSHSST_XBT OSSE_SSHSST_XBT_NORTH OSSE_SSHSST_XBT_SOUTH );
+
+varNames=( zeta v_northward );
+
+for exp_name in ${expNames[*]}; do
+model_dir=$'/g/data/fu5/deg581/'${exp_name}'/output/'
+
+for varname in ${varNames[*]}; do
+
+#eval in_name=$"${model_dir}${hisname}{${year_start}..${year_end}..4}"
+eval in_name=$"${model_dir}${hisname}"
+
+#eval cdo -seltimestep,1/24 -v -select,name=${varname} ${in_name}.nc  ${out_dir}${exp_name}_${hisname}${varname}.nc  # MAKE COMPOSITE FILE
+
+for timestamp in $(seq -w ${year_start} 4 ${year_end}) ; do
+	echo $timestamp
+	cdo -v cat -seltimestep,1/24 -select,name=${varname} ${in_name}${timestamp}.nc  ${out_dir}${exp_name}_${hisname}${varname}.nc  # MAKE COMPOSITE FILE
+done
+
+cdo -v timselmean,5 ${out_dir}${exp_name}_${hisname}${varname}.nc ${out_dir}${exp_name}_${hisname}${varname}_5daymn.nc # 5 DAY MEANS
+
+done
+done
+exit
+
